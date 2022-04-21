@@ -57,6 +57,7 @@ public class Repository{
                     System.out.println(user);
                 }
             }
+            System.out.println(Customer.getAmountCustomer() + " customers.");
         }
         else {
             System.out.println("Insufficient access rights. Only for administrators.");
@@ -70,6 +71,7 @@ public class Repository{
                     System.out.println(user);
                 }
             }
+            System.out.println(Supplier.getAmountSupplier() + " suppliers.");
         }
         else {
             System.out.println("Insufficient access rights. Only for administrators.");
