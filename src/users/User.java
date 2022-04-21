@@ -1,9 +1,9 @@
 package users;
 
-public abstract class User implements Comparable<User>{
+public abstract class User{
     private final String login;
-    private final int password;
-    private final int ID;
+    private final Integer password;
+    private final Integer ID;
 
     public User(String login, int password, int ID) {
         this.login = login;
@@ -15,16 +15,11 @@ public abstract class User implements Comparable<User>{
         return login;
     }
 
-    public int getPassword() {
+    public Integer getPassword() {
         return password;
     }
 
     public int getID() {
         return ID;
-    }
-
-    @Override
-    public int compareTo(User o) {
-        return this.ID.;
     }
 }
