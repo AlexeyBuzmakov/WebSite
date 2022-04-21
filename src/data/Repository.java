@@ -13,19 +13,18 @@ public class Repository{
     public static final int START_AMOUNT_USER = 100;
     public static final int START_AMOUNT_ADMINISTRATOR = 3;
     public static final int START_AMOUNT_SUPPLIER = 15;
+    public static final int START_AMOUNT_CUSTOMER = START_AMOUNT_USER - (START_AMOUNT_ADMINISTRATOR + START_AMOUNT_SUPPLIER);
 
     public void createRepository() {
         Site site = new Site();
         for(int i = 0; i < START_AMOUNT_ADMINISTRATOR; i++) {
             USER.add(site.saveAdministrator());
         }
-        for(int i = START_AMOUNT_ADMINISTRATOR; i < START_AMOUNT_SUPPLIER + START_AMOUNT_ADMINISTRATOR; i++) {
+        for(int i = 0; i < START_AMOUNT_SUPPLIER; i++) {
             USER.add(site.saveSupplier());
-            ((Supplier)USER.get(i)).setListProduct(((Supplier) USER.get(i)).fillListProductSupplier());
         }
-        for(int i = START_AMOUNT_ADMINISTRATOR + START_AMOUNT_SUPPLIER; i < START_AMOUNT_USER; i++) {
+        for(int i = 0; i < START_AMOUNT_CUSTOMER; i++) {
             USER.add(site.saveCustomer());
-            ((Customer)USER.get(i)).setListProduct(((Customer) USER.get(i)).fillListProductCustomer());
         }
     }
 

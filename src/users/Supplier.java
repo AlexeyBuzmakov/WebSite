@@ -10,7 +10,7 @@ public class Supplier extends User{
     public Supplier(String login, int password, int ID) {
         super(login, password, ID);
         amountSupplier++;
-        listProduct = getListProduct();
+        setListProduct(fillListProductSupplier());
     }
 
     public ArrayList<String> getListProduct() {
@@ -28,8 +28,8 @@ public class Supplier extends User{
     public ArrayList<String> fillListProductSupplier() {
         Random random = new Random();
         for(int i = 0; i < random.nextInt(6); i++) {
-            listProduct.add("Product: " + product() + " amount: " + (int)(2 + Math.random() * 10) + " price: "
-                    + (int)(30 + Math.random() * 1000) + " $");
+            listProduct.add("Product: " + product() + " Amount: " + (int)(2 + Math.random() * 10) + " Price: "
+            + (int)(30 + Math.random() * 1000) + " $");
         }
         return listProduct;
     }
@@ -37,7 +37,7 @@ public class Supplier extends User{
     private String product() {
         Random random = new Random();
         String[]product = {"Shirt", "Jeans", "Jacket", "Bed", "Sofa", "Table", "Kettle", "Computer", "Refrigerator",
-                "TV", "Phone", "Ball", "Wardrobe", "Jacket", "Pen", "Machine", "Pencil", "Tape", "Recorder", "Instruments"};
+        "TV", "Phone", "Ball", "Wardrobe", "Jacket", "Pen", "Machine", "Pencil", "Tape", "Recorder", "Instruments"};
         return product[random.nextInt(product.length - 1)];
     }
 

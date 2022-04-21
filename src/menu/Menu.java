@@ -2,11 +2,10 @@ package menu;
 
 import data.Repository;
 import utils.Verification;
-
 import java.util.Scanner;
 
 public class Menu {
-    public static final String[]menu = new String[9];
+    private final String[]menu = new String[9];
 
     public void Start() {
     Repository repository = new Repository();
@@ -86,7 +85,7 @@ public class Menu {
         }
 
         private boolean closeMenu() {
-            System.out.println("Exit");
+            System.out.println("EXIT");
             return false;
         }
 
