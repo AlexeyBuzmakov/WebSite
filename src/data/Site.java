@@ -1,3 +1,5 @@
+package data;
+
 import users.Administrator;
 import users.Customer;
 import users.Supplier;
@@ -19,15 +21,9 @@ public class Site {
         return new Supplier(createLogin(), createPassword(), generationID());
     }
 
-    public void createNewUser() {
-        createLogin();
-        createPassword();
-        generationID();
-    }
-
      private String createLogin() {
         Scanner scanner = new Scanner(System.in);
-        if(Repository.USER.size() >= 100) {
+        if(Repository.USER.size() >= Repository.START_AMOUNT_USER) {
             System.out.println("Enter username");
             while(true) {
                 String login = scanner.nextLine();

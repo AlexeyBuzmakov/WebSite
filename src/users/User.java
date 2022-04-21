@@ -1,5 +1,6 @@
 package users;
 
+
 public abstract class User{
     private final String login;
     private final Integer password;
