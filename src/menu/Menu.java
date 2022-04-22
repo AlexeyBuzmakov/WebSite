@@ -19,53 +19,47 @@ public class Menu {
     private void input() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter username and password");
-        boolean successfully = false;
-        while (!successfully) {
+        while (true) {
             String login = scanner.nextLine().toUpperCase();
             Integer password = Integer.parseInt(scanner.nextLine());
             for (int i = 0; i < Repository.USER.size(); i++) {
-                if (checkLogin(i, login) && checkPassword(i, password)) {
-                    Verification.setCurrentUser(i);
-                    successfully = true;
+                Verification.setCurrentUser(i);
+                if (checkLogin(login) && checkPassword(password)) {
+                    return;
                 }
-
             }
-            if(!successfully) {
-                System.out.println("Incorrect username or password. Try again.");
-            }
+            System.out.println("Incorrect username or password. Try again.");
         }
     }
 
-    private boolean checkLogin(int i, String login) {
-        return Repository.USER.get(i).getLogin().compareTo(login) == 0;
+    private boolean checkLogin(String login) {
+        return Repository.USER.get(Verification.getCurrentUser()).getLogin().compareTo(login) == 0;
     }
 
-    private boolean checkPassword(int i, Integer password) {
-        return Repository.USER.get(i).getPassword().compareTo(password) == 0;
+    private boolean checkPassword(Integer password) {
+        return Repository.USER.get(Verification.getCurrentUser()).getPassword().compareTo(password) == 0;
     }
 
     private void showMenu() {
         for (int i = 0; i < menu.length - 1; i++) {
             switch (i) {
-                case 0 -> menu[i] = "1. Register new user";
-                case 1 -> menu[i] = "2. Get information users by ID (only for administrators)";
-                case 2 -> menu[i] = "3. Show list of customers (only for administrators)";
-                case 3 -> menu[i] = "4. Show list of suppliers (only for administrators)";
-                case 4 -> menu[i] = "5. Get information about current user";
-                case 5 -> menu[i] = "6. Get list orders (only for customers)";
-                case 6 -> menu[i] = "7. Get list products (only for suppliers)";
-                case 7 -> menu[i] = "END for exit main menu";
+                case 0 -> menu[i] = "1. REGISTER NEW USER";
+                case 1 -> menu[i] = "2. GET INFORMATION USERS BY ID (ONLY FOR ADMINISTRATOR)";
+                case 2 -> menu[i] = "3. SHOW LIST OF CUSTOMERS (ONLY FOR ADMINISTRATOR)";
+                case 3 -> menu[i] = "4. SHOW LIST OF SUPPLIERS (ONLY FOR ADMINISTRATOR)";
+                case 4 -> menu[i] = "5. GET INFORMATION ABOUT CURRENT USER";
+                case 5 -> menu[i] = "6. GET LIST ORDERS (ONLY FOR CUSTOMERS)";
+                case 6 -> menu[i] = "7. GET LIST PRODUCTS (ONLY FOR SUPPLIERS)";
+                case 7 -> menu[i] = "END. EXIT MAIN MENU";
             }
             System.out.println(menu[i]);
         }
-        System.out.println();
     }
 
     private void useMenu() {
         Repository repository = new Repository();
         Scanner scanner = new Scanner(System.in);
-        boolean openMenu = true;
-        while(openMenu) {
+        while(true) {
             switch (scanner.nextLine().toUpperCase()) {
                 case "1" -> repository.addNewUser();
                 case "2" -> repository.searchUserByID();
@@ -74,23 +68,12 @@ public class Menu {
                 case "5" -> repository.showCurrentUser();
                 case "6" -> repository.showListProductCustomers();
                 case "7" -> repository.showListProductSuppliers();
-                case "END" -> openMenu = closeMenu();
-                default -> defaultMenu();
+                case "END" -> {System.out.println("EXIT"); return;}
+                default -> System.out.println("Incorrection input. Try again");
                 }
                 System.out.println();
-                if(openMenu) {
-                    showMenu();
-                }
+                showMenu();
             }
-        }
-
-        private boolean closeMenu() {
-            System.out.println("EXIT");
-            return false;
-        }
-
-        private void defaultMenu() {
-            System.out.println("Incorrection input. Try again");
         }
     }
 

@@ -4,7 +4,6 @@ import users.Administrator;
 import users.Customer;
 import users.Supplier;
 import users.User;
-
 import java.util.Scanner;
 
 public class Site {
@@ -29,36 +28,34 @@ public class Site {
                 String login = scanner.nextLine();
                 if (login.length() == 6) {
                     return login.toUpperCase();
-                } else {
-                    System.out.println("Only 6 symbols");
                 }
+                System.out.println("Only 6 symbols");
             }
         }
-        else {
-            char[] login = new char[6];
-            for (int i = 0; i < login.length; i++) {
-                login[i] = (char) (65 + Math.random() * 26);
-            }
-            return String.valueOf(login);
+            return generateLogin();
         }
+
+    private String generateLogin() {
+        char[] login = new char[6];
+        for (int i = 0; i < login.length; i++) {
+            login[i] = (char) (65 + Math.random() * 26);
+        }
+        return String.valueOf(login);
     }
 
     private int createPassword() {
         Scanner scanner = new Scanner(System.in);
-        if(Repository.USER.size() >= 100) {
+        if(Repository.USER.size() >= Repository.START_AMOUNT_USER) {
             System.out.println("Enter password");
             while(true) {
                 Integer password = scanner.nextInt();
                 if (String.valueOf(password).length() == 6) {
                     return password;
-                } else {
-                    System.out.println("Only 6 symbols");
                 }
+                System.out.println("Only 6 symbols");
             }
         }
-        else {
-            return (int) (100000 + Math.random() * 899999);
-        }
+        return (int) (100000 + Math.random() * 899999);
     }
 
     private int generationID() {
