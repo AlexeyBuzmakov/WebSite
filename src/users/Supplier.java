@@ -28,7 +28,7 @@ public class Supplier extends User{
     public ArrayList<String> fillListProductSupplier() {
         Random random = new Random();
         for(int i = 0; i < random.nextInt(6); i++) {
-            listProduct.add("Product: " + product() + " Amount: " + (int)(2 + Math.random() * 10) + " Price: "
+            listProduct.add("Product: " + product() + " Amount: " + (int)(1 + Math.random() * 10) + " Price: "
             + (int)(30 + Math.random() * 1000) + " $");
         }
         return listProduct;

@@ -29,7 +29,7 @@ public class Customer extends User{
     public ArrayList<String> fillListProductCustomer() {
         Random random = new Random();
         for(int i = 0; i < random.nextInt(6); i++) {
-            listProduct.add("Product: " + product() + " Amount: " + (int)(2 + Math.random() * 10));
+            listProduct.add("Product: " + product() + " Amount: " + (int)(1 + Math.random() * 10));
         }
         return listProduct;
     }
