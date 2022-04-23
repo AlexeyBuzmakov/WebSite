@@ -27,7 +27,7 @@ public class Site {
             while(true) {
                 String login = scanner.nextLine();
                 if (login.length() == 6) {
-                    return login.toUpperCase();
+                    return login;
                 }
                 System.out.println("Only 6 symbols");
             }
@@ -43,22 +43,30 @@ public class Site {
         return String.valueOf(login);
     }
 
-    private int createPassword() {
+    private String createPassword() {
         Scanner scanner = new Scanner(System.in);
         if(Repository.USER.size() >= Repository.START_AMOUNT_USER) {
             System.out.println("Enter password");
             while(true) {
-                Integer password = scanner.nextInt();
-                if (String.valueOf(password).length() == 6) {
+                String password = scanner.nextLine();
+                if (password.length() == 6) {
                     return password;
                 }
                 System.out.println("Only 6 symbols");
             }
         }
-        return (int) (100000 + Math.random() * 899999);
+        return generatePassword();
+    }
+
+    private String generatePassword() {
+        char[] login = new char[6];
+        for (int i = 0; i < login.length; i++) {
+            login[i] = (char) (49 + Math.random() * 9);
+        }
+        return String.valueOf(login);
     }
 
     private int generationID() {
-        return (int) (100000 + Math.random() * 899999);
+        return Repository.USER.size() + 1;
     }
 }

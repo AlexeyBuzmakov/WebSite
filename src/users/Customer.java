@@ -7,7 +7,7 @@ public class Customer extends User{
     private ArrayList<String> listProduct = new ArrayList<>();
     private static int amountCustomer;
 
-    public Customer(String login, int password, int ID) {
+    public Customer(String login, String password, int ID) {
         super(login, password, ID);
         amountCustomer++;
         setListProduct(fillListProductCustomer());
@@ -27,8 +27,7 @@ public class Customer extends User{
     }
 
     public ArrayList<String> fillListProductCustomer() {
-        Random random = new Random();
-        for(int i = 0; i < random.nextInt(6); i++) {
+        for(int i = 0; i < (int)(1 + Math.random() * 5); i++) {
             listProduct.add("Product: " + product() + " Amount: " + (int)(1 + Math.random() * 10));
         }
         return listProduct;
@@ -38,7 +37,7 @@ public class Customer extends User{
         Random random = new Random();
         String[]product = {"Shirt", "Jeans", "Jacket", "Bed", "Sofa", "Table", "Kettle", "Computer", "Refrigerator",
         "TV", "Phone", "Ball", "Wardrobe", "Jacket", "Pen", "Machine", "Pencil", "Tape", "Recorder", "Instruments"};
-        return product[random.nextInt(product.length - 1)];
+        return product[random.nextInt(product.length)];
     }
 
     @Override

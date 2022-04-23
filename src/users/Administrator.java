@@ -1,15 +1,9 @@
 package users;
 
 public class Administrator extends User{
-    private static int amountAdministrator;
 
-    public Administrator(String login, int password, int ID) {
+    public Administrator(String login, String password, int ID) {
         super(login, password, ID);
-        amountAdministrator++;
-    }
-
-    public static int getAmountAdministrator() {
-        return amountAdministrator;
     }
 
     @Override

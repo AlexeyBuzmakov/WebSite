@@ -21,7 +21,7 @@ public class Menu {
         System.out.println("Enter username and password");
         while (true) {
             String login = scanner.nextLine().toUpperCase();
-            Integer password = Integer.parseInt(scanner.nextLine());
+            String password = scanner.nextLine();
             for (int i = 0; i < Repository.USER.size(); i++) {
                 Verification.setCurrentUser(i);
                 if (checkLogin(login) && checkPassword(password)) {
@@ -36,7 +36,7 @@ public class Menu {
         return Repository.USER.get(Verification.getCurrentUser()).getLogin().compareTo(login) == 0;
     }
 
-    private boolean checkPassword(Integer password) {
+    private boolean checkPassword(String password) {
         return Repository.USER.get(Verification.getCurrentUser()).getPassword().compareTo(password) == 0;
     }
 

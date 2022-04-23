@@ -3,10 +3,10 @@ package users;
 
 public abstract class User{
     private final String login;
-    private final Integer password;
+    private final String password;
     private final Integer ID;
 
-    public User(String login, int password, int ID) {
+    public User(String login, String password, int ID) {
         this.login = login;
         this.password = password;
         this.ID = ID;
@@ -16,7 +16,7 @@ public abstract class User{
         return login;
     }
 
-    public Integer getPassword() {
+    public String getPassword() {
         return password;
     }
 

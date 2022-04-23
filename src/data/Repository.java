@@ -59,7 +59,7 @@ public class Repository{
                     System.out.println(user);
                 }
             }
-            System.out.println(Customer.getAmountCustomer() + " customers.");
+            System.out.println(Customer.getAmountCustomer() + " customers");
             return;
         }
         System.out.println("Insufficient access rights. Only for administrators.");
@@ -72,7 +72,7 @@ public class Repository{
                     System.out.println(user);
                 }
             }
-            System.out.println(Supplier.getAmountSupplier() + " suppliers.");
+            System.out.println(Supplier.getAmountSupplier() + " suppliers");
             return;
         }
         System.out.println("Insufficient access rights. Only for administrators.");
@@ -89,16 +89,16 @@ public class Repository{
     }
 
     public void showListProductCustomers() {
-        if(Repository.USER.get(Verification.getCurrentUser()) instanceof Customer) {
-        System.out.println(((Customer) Repository.USER.get(Verification.getCurrentUser())).getListProduct());
+        if(USER.get(Verification.getCurrentUser()) instanceof Customer) {
+        System.out.println(((Customer)USER.get(Verification.getCurrentUser())).getListProduct());
         return;
         }
         System.out.println("Insufficient access rights. Only for customers.");
     }
 
     public void showListProductSuppliers() {
-        if(Repository.USER.get(Verification.getCurrentUser()) instanceof Supplier) {
-        System.out.println(((Supplier) Repository.USER.get(Verification.getCurrentUser())).getListProduct());
+        if(USER.get(Verification.getCurrentUser()) instanceof Supplier) {
+        System.out.println(((Supplier)USER.get(Verification.getCurrentUser())).getListProduct());
         return;
         }
         System.out.println("Insufficient access rights. Only for suppliers.");
