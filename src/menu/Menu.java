@@ -1,43 +1,19 @@
 package menu;
 
-import data.Repository;
-import utils.Verification;
+import data.Site;
 import java.util.Scanner;
 
 public class Menu {
     private final String[]menu = new String[9];
 
+    Site site = new Site();
+
     public void Start() {
-    Repository repository = new Repository();
-    repository.createRepository();
-    repository.showRepository();
-    input();
+    site.createRepository();
+    site.showRepository();
+    site.input();
     showMenu();
     useMenu();
-    }
-
-    private void input() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter username and password");
-        while (true) {
-            String login = scanner.nextLine().toUpperCase();
-            String password = scanner.nextLine();
-            for (int i = 0; i < Repository.USER.size(); i++) {
-                Verification.setCurrentUser(i);
-                if (checkLogin(login) && checkPassword(password)) {
-                    return;
-                }
-            }
-            System.out.println("Incorrect username or password. Try again.");
-        }
-    }
-
-    private boolean checkLogin(String login) {
-        return Repository.USER.get(Verification.getCurrentUser()).getLogin().compareTo(login) == 0;
-    }
-
-    private boolean checkPassword(String password) {
-        return Repository.USER.get(Verification.getCurrentUser()).getPassword().compareTo(password) == 0;
     }
 
     private void showMenu() {
@@ -57,17 +33,16 @@ public class Menu {
     }
 
     private void useMenu() {
-        Repository repository = new Repository();
         Scanner scanner = new Scanner(System.in);
         while(true) {
             switch (scanner.nextLine().toUpperCase()) {
-                case "1" -> repository.addNewUser();
-                case "2" -> repository.searchUserByID();
-                case "3" -> repository.showCustomers();
-                case "4" -> repository.showSuppliers();
-                case "5" -> repository.showCurrentUser();
-                case "6" -> repository.showListProductCustomers();
-                case "7" -> repository.showListProductSuppliers();
+                case "1" -> site.registrationNewUser();
+                case "2" -> site.searchByID();
+                case "3" -> site.showCustomers();
+                case "4" -> site.showSuppliers();
+                case "5" -> site.showCurrentUser();
+                case "6" -> site.showListProductsCustomer();
+                case "7" -> site.showListProductsSuppliers();
                 case "END" -> {System.out.println("EXIT"); return;}
                 default -> System.out.println("Incorrection input. Try again");
                 }

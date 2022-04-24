@@ -3,28 +3,46 @@ package data;
 import users.Administrator;
 import users.Customer;
 import users.Supplier;
-import users.User;
+import utils.Verification;
+
 import java.util.Scanner;
 
 public class Site {
+    Repository repository = new Repository();
 
-    public User saveAdministrator() {
-        return new Administrator(createLogin(), createPassword(), generationID());
+    public void createRepository() {
+        for (int i = 0; i < Repository.START_AMOUNT_ADMINISTRATOR; i++) {
+            registrationAdministrator();
+        }
+        for (int i = 0; i < Repository.START_AMOUNT_SUPPLIER; i++) {
+            registrationSupplier();
+        }
+        for (int i = 0; i < Repository.START_AMOUNT_CUSTOMER; i++) {
+            registrationCustomer();
+        }
     }
 
-    public User saveCustomer() {
-        return new Customer(createLogin(), createPassword(), generationID());
+    public void showRepository () {
+        repository.showRepository();
     }
 
-    public User saveSupplier() {
-        return new Supplier(createLogin(), createPassword(), generationID());
+    private void registrationAdministrator() {
+        repository.getUSER().add(new Administrator(createLogin(), createPassword(), generationID()));
     }
 
-     private String createLogin() {
+    private void registrationSupplier() {
+        repository.getUSER().add(new Supplier(createLogin(), createPassword(), generationID()));
+    }
+
+    private void registrationCustomer() {
+        repository.getUSER().add(new Customer(createLogin(), createPassword(), generationID()));
+    }
+
+    private String createLogin() {
         Scanner scanner = new Scanner(System.in);
-        if(Repository.USER.size() >= Repository.START_AMOUNT_USER) {
+        if (repository.getUSER().size() >= Repository.START_AMOUNT_USER) {
             System.out.println("Enter username");
-            while(true) {
+            while (true) {
                 String login = scanner.nextLine();
                 if (login.length() == 6) {
                     return login;
@@ -32,8 +50,8 @@ public class Site {
                 System.out.println("Only 6 symbols");
             }
         }
-            return generateLogin();
-        }
+        return generateLogin();
+    }
 
     private String generateLogin() {
         char[] login = new char[6];
@@ -45,9 +63,9 @@ public class Site {
 
     private String createPassword() {
         Scanner scanner = new Scanner(System.in);
-        if(Repository.USER.size() >= Repository.START_AMOUNT_USER) {
+        if (repository.getUSER().size() >= Repository.START_AMOUNT_USER) {
             System.out.println("Enter password");
-            while(true) {
+            while (true) {
                 String password = scanner.nextLine();
                 if (password.length() == 6) {
                     return password;
@@ -67,6 +85,79 @@ public class Site {
     }
 
     private int generationID() {
-        return Repository.USER.size() + 1;
+        return repository.getUSER().size() + 1;
+    }
+
+    public void input() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter username and password");
+        while (true) {
+            String login = scanner.nextLine().toUpperCase();
+            String password = scanner.nextLine();
+            for (int i = 0; i < repository.getUSER().size(); i++) {
+                Verification.setCurrentUser(i);
+                if (checkLogin(login) && checkPassword(password)) {
+                    return;
+                }
+            }
+            System.out.println("Incorrect username or password. Try again.");
+        }
+    }
+
+    public boolean checkLogin(String login) {
+        return repository.getUSER().get(Verification.getCurrentUser()).getLogin().compareTo(login) == 0;
+    }
+
+    public boolean checkPassword(String password) {
+        return repository.getUSER().get(Verification.getCurrentUser()).getPassword().compareTo(password) == 0;
+    }
+
+    public void registrationNewUser() {
+        registrationCustomer();
+        System.out.println("Congratuletions! New user registered.");
+    }
+
+    public void searchByID() {
+        if (repository.getUSER().get(Verification.getCurrentUser()) instanceof Administrator) {
+            repository.searchUserByID();
+            return;
+        }
+        System.out.println("Insufficient access rights. Only for administrators.");
+    }
+
+    public void showCustomers() {
+        if (repository.getUSER().get(Verification.getCurrentUser()) instanceof Administrator) {
+            repository.showCustomers();
+            return;
+        }
+        System.out.println("Insufficient access rights. Only for administrators.");
+    }
+
+    public void showSuppliers() {
+        if (repository.getUSER().get(Verification.getCurrentUser()) instanceof Administrator) {
+            repository.showSuppliers();
+            return;
+        }
+        System.out.println("Insufficient access rights. Only for administrators.");
+    }
+
+    public void showCurrentUser() {
+        repository.showCurrentUser();
+    }
+
+    public void showListProductsCustomer() {
+        if (repository.getUSER().get(Verification.getCurrentUser()) instanceof Customer) {
+            repository.showListProductCustomers();
+            return;
+        }
+        System.out.println("Insufficient access rights. Only for customers.");
+    }
+
+    public void showListProductsSuppliers() {
+        if (repository.getUSER().get(Verification.getCurrentUser()) instanceof Supplier) {
+            repository.showListProductSuppliers();
+            return;
+        }
+        System.out.println("Insufficient access rights. Only for suppliers.");
     }
 }
